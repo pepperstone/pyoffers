@@ -7,6 +7,8 @@ from .affiliate import (  # noqa
     AffiliateOfferManager,
     AffiliateUser,
     AffiliateUserManager,
+    AffiliateBilling,
+    AffiliateBillingManager,
 )
 from .conversion import Conversion, ConversionManager  # noqa
 from .core import ApplicationManager, ModelManager  # noqa
@@ -17,7 +19,6 @@ from .offer_file import OfferFile, OfferFileManager  # noqa
 from .raw_log import RawLogManager  # noqa
 from .tags import Tag, TagManager, TagRelationManager  # noqa
 
-
 MODEL_MANAGERS = (
     AdvertiserManager,
     ConversionManager,
@@ -27,6 +28,7 @@ MODEL_MANAGERS = (
     RawLogManager,
     AffiliateManager,
     AffiliateUserManager,
+    AffiliateBillingManager,
     OfferCategoryManager,
     ApplicationManager,
     OfferFileManager,

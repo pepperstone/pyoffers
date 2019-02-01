@@ -1,4 +1,5 @@
 # coding: utf-8
+from pyoffers.utils import Filter, Sort
 from .core import InvisibleModelManager, Model, ModelManager
 from .offer_file import OfferFileManager
 
@@ -15,7 +16,7 @@ class AffiliateOfferManager(InvisibleModelManager):
 
 
 class AffiliateUser(Model):
-    generic_methods = ('update', 'delete')
+    generic_methods = ()
 
 
 class AffiliateUserManager(ModelManager):
@@ -29,6 +30,32 @@ class AffiliateUserManager(ModelManager):
         'find_all',
         'find_all_ids',
     )
+
+
+class AffiliateBilling(Model):
+    pass
+
+
+class AffiliateInvoice(Model):
+    pass
+
+
+class AffiliateBillingManager(ModelManager):
+    model = AffiliateBilling
+    model_aliases = ["AffiliateInvoice"]
+    name = 'affiliate_billings'
+    generic_methods = ()
+
+    def find_all(self, sort=(), limit=None, page=None, fields=None, contain=None, **kwargs):
+        assert limit is None or isinstance(limit, int), 'Limit should be an integer'
+        assert page is None or isinstance(page, int), 'Page should be an integer'
+        assert fields is None or isinstance(fields, (tuple, list)), 'Fields should be a tuple or list'
+        return self._call(
+            'findAllInvoices',
+            filters=Filter(**kwargs),
+            sort=Sort(sort, self.model.__name__),
+            limit=limit, page=page, fields=fields, contain=contain, single_result=False
+        )
 
 
 class Affiliate(Model):
